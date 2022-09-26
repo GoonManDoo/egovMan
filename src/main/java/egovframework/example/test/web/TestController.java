@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import egovframework.example.test.domain.Search;
@@ -55,6 +57,12 @@ public class TestController {
 	public String testRegister() {
 		return "test/testRegister";
 	}
+	
+	@RequestMapping("/form.do")
+	public String form() {
+
+		return "uploadForm";
+	}
 
 	// 글 작성 버튼 구현
 	@RequestMapping(value = "/insertTest.do")
@@ -93,8 +101,8 @@ public class TestController {
 	}
 
 	// 수정하기
-	@RequestMapping(value = "/updateTest.do")
-	public String updateTest(@ModelAttribute("testVO") TestVO testVO, HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "/updateTest.do", method = RequestMethod.POST)
+	public String updateTest(@ModelAttribute("testVO") TestVO testVO, MultipartHttpServletRequest request) throws Exception {
 		// 파일 업로드 처리
 		String fileName = null;
 		MultipartFile uploadFile = testVO.getUploadFile();

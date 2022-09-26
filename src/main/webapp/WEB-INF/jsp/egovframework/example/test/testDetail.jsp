@@ -27,6 +27,14 @@
 	crossorigin="anonymous"></script>
 <link href="/css/test/test.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	var cnt = 1;
+	
+	function file_add() {
+		$("#fileName").append("<br>" + "<input type='file' name='file" + cnt + "'/>");
+		cnt++;
+	}
+</script>
 </head>
 <body>
 	<div class="container">
@@ -72,8 +80,6 @@
 							</tr>
 						</c:if>
 					</tr>
-
-
 					<tr>
 						<th>첨부파일:</th>
 						<td><input type="file" name="uploadFile"></td>
