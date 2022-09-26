@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                   
+<mapper namespace="egovframework.example.test.service.TestMapper">
+<!-- <mapper namespace="egovframework.sqlmap.mappers.testMapper>" -->
+
+	
+
+	<!-- 게시글 전체조회 -->
+		<select id="selectTest" resultType="TestVO">
+			SELECT
+			*
+			FROM test
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				<if test="searchType=='testTitle' and keyword != null and keyword !=''">
+					AND testTitle like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='testContent' and keyword != null and keyword !=''">
+					AND testContent like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='testName' and keyword != null and keyword !=''">
+					AND testName like CONCAT('%', #{keyword}, '%')
+				</if>
+			</trim>
+			ORDER BY
+			testId DESC
+			LIMIT #{startList}, #{listSize}
+		</select>
+		
+	<!-- 전체 글의 개수를 읽어오는 쿼리문 -->
+		<select id="getBoardListCnt" resultType="int">
+			SELECT COUNT(*) as listCnt
+			FROM test
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				<if test="keyword != null and keyword != ''">
+					<if test="searchType=='testTitle'">
+						AND testTitle like CONCAT('%', #{keyword}, '%')
+					</if>
+					<if test="searchType=='testContent'">
+						AND testContent like CONCAT('%', #{keyword}, '%')
+					</if>
+					<if test="searchType=='testName'">
+						AND testName like CONCAT('%', #{keyword}, '%')
+					</if>
+				</if>
+			</trim>
+		</select>
+	
+	<!-- 게시글 만들기 -->
+		<insert id="insertTest" parameterType="TestVO">
+			<!-- <![CDATA[ -->
+			INSERT INTO test(testTitle, testContent, testName, testDate, fileName)
+			VALUES(#{testTitle}, #{testContent}, #{testName}, now(), #{fileName})
+			<!-- ]]> -->
+		</insert>
+		
+	<!-- 게시글 자세히보기 -->
+		<select id="selectDetail" parameterType="egovframework.example.test.domain.TestVO" resultType="egovframework.example.test.domain.TestVO">
+			<![CDATA[
+				SELECT *
+				FROM test
+				WHERE testId = #{testId}
+			]]>
+		</select>
+		
+	<!-- 게시글 업데이트 -->
+		<update id="updateTest">
+			UPDATE test 
+			SET
+			testTitle = #{testTitle},
+			testContent = #{testContent},
+			testName = #{testName},
+			fileName = #{fileName}
+			WHERE testId = #{testId}
+		</update>
+	
+	<!-- 게시글 삭제 -->
+		<delete id = "deleteTest">
+			DELETE FROM test
+			WHERE
+			testId = #{testId}
+		</delete>
+
+
+
+
+
+
+</mapper> 
