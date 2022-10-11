@@ -35,7 +35,9 @@
 			</thead>
 			<tbody>
 				<!-- enctype="multipart/form-data" 이 부분을 사용해 줘야지만 파일을 전송할 수 있다. -->
-				<form id="form_test" action="insertTest.do" method="post"
+				<%-- <form id="form_test" name=fileForm action="insertTest.do" method="post"
+					encType="multipart/form-data"> --%>
+					<form id="form_test" name=fileForm action="insertTest.do" method="post"
 					encType="multipart/form-data">
 					<tr>
 						<th>제목:</th>
@@ -54,14 +56,14 @@
 					</tr>
 					<tr>
 						<th>첨부파일:</th>
-						<td><input type="file" name="uploadFile"></td>	
+						<td><input type="file" name="uploadFile" multiple="multiple">
 					</tr>
 				<tr>
 					<td colspan="2">
 						<button id="btn_register" type="button" class="btn_register">등록</button>
 						<button id="btn_previous" type="button" class="btn_previous">이전</button>
 				</tr>
-
+				
 				</form>
 			</tbody>
 		</table>
@@ -74,7 +76,6 @@
 
 	$(document).on('click', '#btn_register', function(e) {
 		$("#form_test").submit();
-
 	});
 
 	//이전 클릭 시 testList로 이동
@@ -83,6 +84,7 @@
 		$(location).attr('href', 'testList.do');
 
 	});
+	
 </script>
 </html>
 

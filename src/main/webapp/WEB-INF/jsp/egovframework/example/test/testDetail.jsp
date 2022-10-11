@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -27,24 +28,21 @@
 	crossorigin="anonymous"></script>
 <link href="/css/test/test.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script>
-	var cnt = 1;
-	
-	function file_add() {
-		$("#fileName").append("<br>" + "<input type='file' name='file" + cnt + "'/>");
-		cnt++;
+<style>
+	#reply_btn {
+		text-align: right;
 	}
-</script>
+</style>
 </head>
 <body>
 	<div class="container">
-		<table class="table table-bordered">
+		
 			<thead>
 				<h1>글 상세보기 Detail</h1>
 			</thead>
 			<tbody>
 				<form action="updateTest.do" id="viewForm" method="post"
-					encType="multipart/form-data">
+					multiple="multiple" encType="multipart/form-data">
 					<tr>
 						<th>글번호:</th>
 						<td><input name="testId" type="text" value="${result.testId}"
@@ -75,6 +73,7 @@
 								<td><a href="fileDownload.do?fileName=${result.fileName}">
 										<input type="text" id="asd" value="${result.fileName}"
 										name="fileName" class="form-control" readonly />
+										
 								</a>
 									<button id="asdasd" type="button" class="btn_previous">파일지우기</button>
 							</tr>
@@ -82,10 +81,10 @@
 					</tr>
 					<tr>
 						<th>첨부파일:</th>
-						<td><input type="file" name="uploadFile"></td>
+						<td><input type="file" name="uploadFiles" multiple="multiple"></td>
 					</tr>
+					
 					<tr>
-
 						<td colspan="2">
 							<button id="btn_previous" type="button" class="btn_previous">이전</button>
 							<button id="btn_delete" type="button" class="btn_previous">삭제</button>
@@ -95,13 +94,86 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<!-- 댓글 -->
+	<div class="container">
+	<table class="table table-bordered">
+		
+	
+	<c:forEach items="${reply}" var="reply">
+	<div>
+	<tr>
+		<th>작성자 : </th>
+		<td><input type="text" value="${reply.writer }" class="form-control" readonly="readonly" /><td>
+	</tr>
+	</div>
+		
+	<div>
+	<tr>
+		<th>내용 : </th>
+		<td><input type="text" value="${reply.content }" class="form-control" readonly="readonly" /><td>
+	</tr>
+	</div>
+	
+	<div>
+	<tr>
+		<th>작성일자 : </th>
+		<td><fmt:formatDate value="${reply.regDate }" type="date" dateStyle="full" /><td>
+	</tr>
+	<div>
+	<tr>
+		<td id="reply_btn"><button type="button" class="reply_modify" value="${reply.testId }">수정</button>
+			<button type="button" class="reply_delete" value="${reply.testId }">삭제</button></td>
+	</tr>
+	</div>
+	
+	</c:forEach>
+		
+		<tr>
+			<th></th>
+			<td></td>
+		</tr>
+		<tr>
+			<th>댓글 작성</th>
+			<td>-------------------------------------------------------</td>
+		</tr>
+		<form action="reply.do" method="post">
+		<tr>
+			<tr>
+				<th>작성자</th>
+				<td><input type="text" name="writer" class="form-control">
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td><textarea rows="5" cols="50" name="content" class="form-control"></textarea>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<input type="hidden" name="testId" value="${result.testId }" class="form-control">
+				<button type="submit">댓글작성</button>
+			</tr>
+			
+		</form>
+		</table>
+	</div>
+
+
 
 
 </body>
 <script type="text/javascript">
+
+	<!-- 댓글 버튼 -->
+	$(document).on('click', '#reply_modify', function(e) {
+		
+	})
+	
+	
+	<!-- 게시글 수정 버튼 -->
 	$(document).on('click', '#btn_modify', function(e) {
 		if (confirm("정말 수정하시겠습니까 ?") == true) {
 			$("#viewForm").submit();
+			alert('수정이 완료되었습니다.');
 		} else {
 			return;
 		}

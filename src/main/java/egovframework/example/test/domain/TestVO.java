@@ -1,5 +1,7 @@
 package egovframework.example.test.domain;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class TestVO {
@@ -14,13 +16,21 @@ public class TestVO {
 	private String testDate;
 	
 	private String fileName;
-	private MultipartFile uploadFile;
+	private MultipartFile uploadFiles;
+	private List<MultipartFile> list;
+	
+	/*private MultipartFile uploadFile;*/
+	/*private List<TestVO> uploadFile;*/
+	/*private List<MultipartFile> fileList;*/
+	/*List<MultipartFile> multiFileList*/
 	
 
 
 	public int getTestId() {
 		return testId;
 	}
+
+	
 
 	public void setTestId(int testId) {
 		this.testId = testId;
@@ -70,14 +80,44 @@ public class TestVO {
 		this.fileName = fileName;
 	}
 
-	public MultipartFile getUploadFile() {
+	/*public List<MultipartFile> getUploadFile() {
 		return uploadFile;
 	}
 
-	public void setUploadFile(MultipartFile uploadFile) {
+	public void setUploadFile(List<MultipartFile> uploadFile) {
 		this.uploadFile = uploadFile;
+	}*/
+
+	public List<MultipartFile> getList() {
+		return list;
 	}
 
+	public void setList(List<MultipartFile> list) {
+		this.list = list;
+	}
+
+	public MultipartFile getUploadFile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public MultipartFile getUploadFiles() {
+		return uploadFiles;
+	}
+
+	public void setUploadFiles(MultipartFile uploadFiles) {
+		this.uploadFiles = uploadFiles;
+	}
+
+	/*public List<MultipartFile> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(List<MultipartFile> fileList) {
+		this.fileList = fileList;
+	}*/
+
+	
 	
 
 	

@@ -24,6 +24,8 @@ public interface TestService {
 
 	//총 게시글 개수 확인
 	public int getBoardListCnt(Search search) throws Exception;
+	
+	
     
 
 

@@ -1,4 +1,4 @@
-package egovframework.example.test.web;
+/*package egovframework.example.test.web;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +34,7 @@ public class FileController {
 		String uploadPath = request.getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
 		
 		// 1. id, name 파라미터 읽어오기
-		Map map = new HashMap();	// (KEY, Value)
+		Map<String, Object> map = new HashMap<String, Object>();	// (KEY, Value)
 		// String id = multipartRequest.getParameter("id");
 		// String name = multipartRequest.getParameter("name");
 		Enumeration<String> e = multipartRequest.getParameterNames();
@@ -112,4 +112,4 @@ public class FileController {
 		in.close();
 		out.close();
 	}
-}
+}*/

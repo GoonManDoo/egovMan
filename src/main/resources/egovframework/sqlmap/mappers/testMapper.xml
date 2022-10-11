@@ -48,11 +48,12 @@
 	
 	<!-- 게시글 만들기 -->
 		<insert id="insertTest" parameterType="TestVO">
-			<!-- <![CDATA[ -->
+			 <![CDATA[ 
 			INSERT INTO test(testTitle, testContent, testName, testDate, fileName)
 			VALUES(#{testTitle}, #{testContent}, #{testName}, now(), #{fileName})
-			<!-- ]]> -->
+			 ]]> 
 		</insert>
+		
 		
 	<!-- 게시글 자세히보기 -->
 		<select id="selectDetail" parameterType="egovframework.example.test.domain.TestVO" resultType="egovframework.example.test.domain.TestVO">
