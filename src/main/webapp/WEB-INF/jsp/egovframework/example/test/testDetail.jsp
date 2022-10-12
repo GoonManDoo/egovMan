@@ -32,6 +32,14 @@
 	#reply_btn {
 		text-align: right;
 	}
+	
+	#btn_modify {
+		margin-bottom: 50px;
+	}
+	
+	#dat {
+		text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -99,7 +107,7 @@
 	<div class="container">
 	<table class="table table-bordered">
 		
-	
+	<h1 id="dat">댓글창</h1>
 	<c:forEach items="${reply}" var="reply">
 	<div>
 	<tr>
@@ -120,10 +128,12 @@
 		<th>작성일자 : </th>
 		<td><fmt:formatDate value="${reply.regDate }" type="date" dateStyle="full" /><td>
 	</tr>
+	</div>
+	
 	<div>
 	<tr>
 		<td id="reply_btn"><button type="button" class="reply_modify" value="${reply.testId }">수정</button>
-			<button type="button" class="reply_delete" value="${reply.testId }">삭제</button></td>
+			<button type="submit" class="reply_delete" value="${reply.testId }">삭제</button></td>
 	</tr>
 	</div>
 	
@@ -133,11 +143,7 @@
 			<th></th>
 			<td></td>
 		</tr>
-		<tr>
-			<th>댓글 작성</th>
-			<td>-------------------------------------------------------</td>
-		</tr>
-		<form action="reply.do" method="post">
+		<form action="reply.do" method="post" id="replyForm">
 		<tr>
 			<tr>
 				<th>작성자</th>
@@ -179,9 +185,11 @@
 		}
 
 	});
+	
 	$(document).on('click', '#btn_delete', function(e) {
 		if (confirm("정말 삭제하시겠습니까 ?") == true) {
 			$("#viewForm").attr("action", "deleteTest.do");
+			
 			$("#viewForm").submit();
 		} else {
 			return;

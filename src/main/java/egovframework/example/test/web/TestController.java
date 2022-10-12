@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FilenameUtils;
@@ -102,6 +103,7 @@ public class TestController {
 		System.out.println("uploadFile : " + uploadFile);
 
 		String path = "C:\\Temp\\download\\";
+		
 
 		for (MultipartFile mf : list) {
 			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
@@ -190,7 +192,21 @@ public class TestController {
 	// 삭제하기
 	@RequestMapping(value = "/deleteTest.do")
 	public String deleteTest(@ModelAttribute("testVO") TestVO testVO) throws Exception {
+		
+		
+		// 로컬 파일 삭제
+		/*String path = ServletContext.getRealPath("저장된 파일 경로");
+		
+		//현재 게시판에 존재하는 파일객체를 만듬
+		File file = new File(path + "\\" + "저장된 파일 이름");
+				
+		if(file.exists()) { // 파일이 존재하면
+			file.delete(); // 파일 삭제	
+		}*/
+		
 		testServiceImpl.deleteTest(testVO);
+		
+		
 		return "redirect:testList.do";
 	}
 

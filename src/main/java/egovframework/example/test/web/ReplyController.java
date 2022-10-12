@@ -30,5 +30,14 @@ public class ReplyController {
 	
 	
 	//댓글 삭제
+	@RequestMapping(value = "/replyDelete.do", method = RequestMethod.POST)
+	public String replyDelete(ReplyVO vo) throws Exception {
+		
+		replyService.delete(vo);
+		
+		return "redirect:testList.do";
+		
+		
+	}
 
 }
