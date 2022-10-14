@@ -30,14 +30,14 @@ public class ReplyServiceImpl implements ReplyService {
 
 	//댓글 수정
 	@Override
-	public void modify(ReplyVO vo) throws Exception {
-		dao.modify(vo);
+	public void updateReply(ReplyVO vo) throws Exception {
+		dao.updateReply(vo);
 	}
 
 	//댓글 삭제
 	@Override
-	public void delete(ReplyVO vo) throws Exception {
-		dao.delete(vo);
+	public void deleteReply(ReplyVO vo) throws Exception {
+		dao.deleteReply(vo);
 	}
 	
 	

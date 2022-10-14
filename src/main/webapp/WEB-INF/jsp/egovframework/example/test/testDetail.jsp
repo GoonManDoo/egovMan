@@ -103,23 +103,25 @@
 		</table>
 	</div>
 	
+	
 	<!-- 댓글 -->
 	<div class="container">
 	<table class="table table-bordered">
 		
 	<h1 id="dat">댓글창</h1>
+	<form action="replyUpdate.do" id="replyForm">
 	<c:forEach items="${reply}" var="reply">
 	<div>
 	<tr>
 		<th>작성자 : </th>
-		<td><input type="text" value="${reply.writer }" class="form-control" readonly="readonly" /><td>
+		<td><input type="text" value="${reply.writer }" class="form-control"/><td>
 	</tr>
 	</div>
 		
 	<div>
 	<tr>
 		<th>내용 : </th>
-		<td><input type="text" value="${reply.content }" class="form-control" readonly="readonly" /><td>
+		<td><input type="text" value="${reply.content }" class="form-control"/><td>
 	</tr>
 	</div>
 	
@@ -132,18 +134,18 @@
 	
 	<div>
 	<tr>
-		<td id="reply_btn"><button type="button" class="reply_modify" value="${reply.testId }">수정</button>
-			<button type="submit" class="reply_delete" value="${reply.testId }">삭제</button></td>
+		<td id="reply_btn"><button type="button" id="replyUpdateBtn" class="replyUpdateBtn">수정</button>
+			               <button type="button" id="replyDeleteBtn" class="replyDeleteBtn">삭제</button></td>
 	</tr>
 	</div>
-	
 	</c:forEach>
+	</form>
 		
 		<tr>
 			<th></th>
 			<td></td>
 		</tr>
-		<form action="reply.do" method="post" id="replyForm">
+		<form action="reply.do" method="post">
 		<tr>
 			<tr>
 				<th>작성자</th>
@@ -169,13 +171,28 @@
 </body>
 <script type="text/javascript">
 
-	<!-- 댓글 버튼 -->
-	$(document).on('click', '#reply_modify', function(e) {
-		
-	})
+	<!-- 댓글 수정 버튼 -->
+	$(document).on('click', '#replyUpdateBtn', function(e) {
+		if (confirm("정말 수정하시겠습니까 ?") == true) {
+			$("replyForm").submit();
+		} else {
+			return;
+		}
+	});
+	
+	/* 댓글 삭제 버튼 */
+	$(document).on('click', '#replyDeleteBtn', function(e) {
+		if (confirm("정말 삭제하시겠습니까 ?") == true) {
+			$("#replyForm").attr("action", "replyDelete.do");
+			$("#replyForm").submit();
+		} else {
+			return;
+		}
+	});
 	
 	
-	<!-- 게시글 수정 버튼 -->
+	
+	//게시글 수정 버튼
 	$(document).on('click', '#btn_modify', function(e) {
 		if (confirm("정말 수정하시겠습니까 ?") == true) {
 			$("#viewForm").submit();
@@ -186,10 +203,10 @@
 
 	});
 	
+	//게시글 삭제 버튼
 	$(document).on('click', '#btn_delete', function(e) {
 		if (confirm("정말 삭제하시겠습니까 ?") == true) {
 			$("#viewForm").attr("action", "deleteTest.do");
-			
 			$("#viewForm").submit();
 		} else {
 			return;

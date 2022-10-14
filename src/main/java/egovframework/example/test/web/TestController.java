@@ -37,7 +37,21 @@ public class TestController {
 	private ReplyService replyservice;
 	
 	
-
+	//인터셉터 테스트
+	@RequestMapping(value = "/callTestList.do", method = RequestMethod.GET)
+	public String home(Model model, RedirectAttributes rttr) {
+		System.out.println("┏┯┯┯┯┯┓\\r\\n\" + \r\n" + 
+				"				\"┃││∧ ∧│┃살려줘!!\\r\\n\" + \r\n" + 
+				"				\"┃│  (≧Д≦)  ┃\\r\\n\" + \r\n" + 
+				"				\"┃││ф  ф│┃\\r\\n\" + \r\n" + 
+				"				\"┗┷┷┷┷┷┛\\r\\n\" + \r\n" + 
+				"				\"");
+		
+		return "redirect:testList.do";
+		
+	}
+	
+	
 	// 글 목록 리스트, 페이징, 검색
 	@RequestMapping(value = "/testList.do")
 	public String testListDo(Model model, @RequestParam(required = false, defaultValue = "1") int page,
@@ -59,9 +73,11 @@ public class TestController {
 		model.addAttribute("pagination", search);
 		// 게시글 화면 출력
 		model.addAttribute("list", testServiceImpl.selectTest(search));
-
+		
+		
 		return "test/testList";
 	}
+	
 
 	// 글 작성 클릭시 글 작성 페이지로 이동
 	@RequestMapping(value = "/testRegister.do")
@@ -209,7 +225,10 @@ public class TestController {
 		
 		return "redirect:testList.do";
 	}
+	
 
+	
+	
 	
 	
 }

@@ -1,5 +1,6 @@
 package egovframework.example.test.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +19,10 @@ public class TestVO {
 	private String fileName;
 	private MultipartFile uploadFiles;
 	private List<MultipartFile> list;
+	
+	private String writer;
+	private String content;
+	private Date regDate;
 	
 	/*private MultipartFile uploadFile;*/
 	/*private List<TestVO> uploadFile;*/
@@ -107,6 +112,42 @@ public class TestVO {
 
 	public void setUploadFiles(MultipartFile uploadFiles) {
 		this.uploadFiles = uploadFiles;
+	}
+
+
+
+	public String getWriter() {
+		return writer;
+	}
+
+
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+
+
+	public String getContent() {
+		return content;
+	}
+
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 
 	/*public List<MultipartFile> getFileList() {

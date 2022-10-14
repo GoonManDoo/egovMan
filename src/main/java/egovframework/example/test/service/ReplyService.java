@@ -2,8 +2,11 @@ package egovframework.example.test.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import egovframework.example.test.domain.ReplyVO;
 
+@Service
 public interface ReplyService {
 
 	//댓글 조회
@@ -13,9 +16,9 @@ public interface ReplyService {
 	public void write(ReplyVO vo) throws Exception;
 	
 	//댓글 수정
-	public void modify(ReplyVO vo) throws Exception;
+	public void updateReply(ReplyVO vo) throws Exception;
 	
 	//댓글 삭제
-	public void delete(ReplyVO vo) throws Exception;
+	public void deleteReply(ReplyVO vo) throws Exception;
 	
 }

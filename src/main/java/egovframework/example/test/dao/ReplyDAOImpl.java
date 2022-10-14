@@ -31,14 +31,14 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	//댓글 수정
 	@Override
-	public void modify(ReplyVO vo) throws Exception {
-		sql.update(namespace + ".replyModify", vo);
+	public void updateReply(ReplyVO vo) throws Exception {
+		sql.update(namespace + ".updateReply", vo);
 	}
 
 	//댓글 삭제
 	@Override
-	public void delete(ReplyVO vo) throws Exception {
-		sql.delete(namespace + ".replyDelete", vo);
+	public void deleteReply(ReplyVO vo) throws Exception {
+		sql.delete(namespace + ".deleteReply", vo);
 	}
 
 	

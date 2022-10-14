@@ -16,7 +16,7 @@
 	</insert>
 	
 	<!-- 댓글 수정 -->
-	<update id="replyModify" parameterType="ReplyVO">
+	<update id="updateReply" parameterType="ReplyVO">
 		UPDATE reply SET
 			writer = #{writer},
 			content = #{content}
@@ -25,7 +25,7 @@
 	</update>
 	
 	<!-- 댓글 삭제 -->
-	<delete id="replyDelete" parameterType="ReplyVO">
+	<delete id="deleteReply" parameterType="ReplyVO">
 		DELETE FROM reply
 		WHERE rno = #{rno}
 		AND testId = #{testId}

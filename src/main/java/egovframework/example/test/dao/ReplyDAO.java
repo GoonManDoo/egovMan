@@ -13,8 +13,8 @@ public interface ReplyDAO {
 	public void write(ReplyVO vo) throws Exception;
 	
 	//댓글 수정
-	public void modify(ReplyVO vo) throws Exception;
+	public void updateReply(ReplyVO vo) throws Exception;
 	
 	//댓글 삭제
-	public void delete(ReplyVO vo) throws Exception;
+	public void deleteReply(ReplyVO vo) throws Exception;
 }
