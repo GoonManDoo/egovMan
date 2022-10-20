@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.testlist {
+	width: 100%;
+}
+
+.list_table {
+	width: 100%;
+}
+
+.list_table thead th {
+	text-align: center;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 8px 0;
+	background: #faf9fa;
+}
+
+.list_table tbody td {
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 5px 0;
+}
+
+.paging {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.btn_write, .btn_register, .btn_previous {
+	float: right;
+	margin-right: 10px;
+}
+
+.pagination1 {
+	margin-top: 60px;
+	margin-left: 750px;
+}
