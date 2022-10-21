@@ -37,6 +37,13 @@ public class TestController {
 	private ReplyService replyservice;
 	
 	
+	
+	@RequestMapping(value = "/login.do")
+	public String login() throws Exception {
+		return "test/login";
+		
+	}
+	
 	//인터셉터 테스트
 	@RequestMapping(value = "/callTestList.do", method = RequestMethod.GET)
 	public String home(Model model, RedirectAttributes rttr) {

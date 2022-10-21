@@ -13,7 +13,7 @@ import egovframework.example.test.service.UserService;
 @Controller
 public class UserController {
 
-	@Inject
+	/*@Inject
 	UserService service;
 	
 	
@@ -50,7 +50,7 @@ public class UserController {
 		session.invalidate(); //세션 전체를 날림
 	  //session.removeAttribute("login"); //하나씩 날림
 		return "redirect:/testList.do"; //로그아웃 후 게시판 목록으로 이동
-	}
+	}*/
 	
 	
 }

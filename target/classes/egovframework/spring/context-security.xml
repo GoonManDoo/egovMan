@@ -13,22 +13,24 @@
 	    <intercept-url pattern="/**" access="isAuthenticated()"/>
 	
 	    <form-login login-page='/login.do' 
-	      default-target-url="/homepage.do" 
+	      default-target-url="/testList.do" 
 	      authentication-failure-url="/login.do?error=true" />
+	      
 	    <logout logout-success-url="/login.do" />
 	</http>
 	
 	<authentication-manager>
 	    <authentication-provider>
 	        <user-service>
-	            <user name="user1" password="user1Pass" authorities="ROLE_USER" />
+	            <user name="user1" password="user1" authorities="ROLE_USER" />
 	        </user-service>
-	        <password-encoder ref="encoder" />
+	        <!-- <password-encoder ref="encoder" /> -->
 	    </authentication-provider>
 	</authentication-manager>
 	
-	<beans:bean id="encoder" 
+	<!-- <beans:bean id="encoder" 
 	  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-	</beans:bean>
+	</beans:bean> -->
+
 
 </beans:beans>
