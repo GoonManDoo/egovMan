@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 
 <head>
@@ -23,6 +25,7 @@
 
 	<div class="testlist">
 		<form id="boardForm" name="boardForm" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<table class="list_table">
 				<colgroup>
 					<col width="20%" />
@@ -41,7 +44,7 @@
 					</tr>
 				</thead>
 
-				<!-- jstl 데이터베이스를 검색해 넘겨 받은 list 를 result 라는 이름으로 순차적으로 실행을 시키게 됨  java의 for문같이 순차적으로 실행시킴-->
+				<!-- jstl 데이터베이스를 검색해 넘겨 받은 list 를 result 라는 이름으로 순차적으로 실행을 시키게 됨  java의 for문같이 순차적으로 실행시킴 -->
 
 				<c:forEach items="${list}" var="result">
 					<tr>

@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,6 +52,8 @@
 			<tbody>
 				<form action="updateTest.do" id="viewForm" method="post"
 					multiple="multiple" encType="multipart/form-data">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<sec:csrfInput/>
 					<tr>
 						<th>글번호:</th>
 						<td><input name="testId" type="text" value="${result.testId}"
@@ -110,6 +113,7 @@
 		
 	<h1 id="dat">댓글창</h1>
 	<form action="replyUpdate.do" id="replyForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<c:forEach items="${reply}" var="reply">
 	<div>
 	<tr>
@@ -146,6 +150,7 @@
 			<td></td>
 		</tr>
 		<form action="reply.do" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<tr>
 			<tr>
 				<th>작성자</th>

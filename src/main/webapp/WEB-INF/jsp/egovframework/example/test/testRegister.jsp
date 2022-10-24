@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,10 +36,10 @@
 			</thead>
 			<tbody>
 				<!-- enctype="multipart/form-data" 이 부분을 사용해 줘야지만 파일을 전송할 수 있다. -->
-				<%-- <form id="form_test" name=fileForm action="insertTest.do" method="post"
-					encType="multipart/form-data"> --%>
 					<form id="form_test" name=fileForm action="insertTest.do" method="post"
 					encType="multipart/form-data">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<sec:csrfInput/>
 					<tr>
 						<th>제목:</th>
 						<td><input type="text" placeholder="제목을 입력하세요. "
@@ -64,6 +65,7 @@
 						<button id="btn_previous" type="button" class="btn_previous">이전</button>
 				</tr>
 				
+						
 				</form>
 			</tbody>
 		</table>

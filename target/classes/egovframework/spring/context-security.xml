@@ -18,6 +18,7 @@
 	      authentication-failure-url="/login.do?error=true" />
 	      
 	    <logout logout-success-url="/login.do" />
+	<csrf disabled="true" />
 	</http>
 	
 	<authentication-manager>
