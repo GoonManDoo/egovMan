@@ -12,6 +12,8 @@
 	    <intercept-url pattern="/login*" access="isAnonymous()" />
 	    <intercept-url pattern="/**" access="isAuthenticated()"/>
 	    <intercept-url pattern="/favicon.ico" access="ROLE_ANONYMOUS" />
+	    <intercept-url pattern="/css/test/**" access="permitAll" />
+	    
 	
 	    <form-login login-page='/login.do' 
 	      default-target-url="/testList.do" 

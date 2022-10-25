@@ -44,10 +44,28 @@
             </props>
         </property>
     </bean>
+    
+       <!-- tiles 설정 -->
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+        <property name="order" value="1" />
+    </bean>
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles/tiles-layout.xml</value>
+            </list>
+        </property>
+    </bean>
+    <!--/tiles  -->
+    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="2" 
+          p:viewClass="org.springframework.web.servlet.view.JstlView"
+          p:prefix="/WEB-INF/jsp/egovframework/example/" p:suffix=".jsp"/>
 
-    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
+    
+   <!--  <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
 	    p:viewClass="org.springframework.web.servlet.view.JstlView"
-	    p:prefix="/WEB-INF/jsp/egovframework/example/" p:suffix=".jsp"/>
+	    p:prefix="/WEB-INF/jsp/egovframework/example/" p:suffix=".jsp"/> --> 
 
     <!-- For Pagination Tag -->
     <bean id="imageRenderer" class="egovframework.example.cmmn.web.EgovImgPaginationRenderer"/>

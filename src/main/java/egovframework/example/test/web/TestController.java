@@ -37,7 +37,12 @@ public class TestController {
 	private ReplyService replyservice;
 	
 	
+	@RequestMapping(value = "/test.do")
+	public String TilesTest() {
+		return "test/test";
+	}
 	
+	//로그인 페이지
 	@RequestMapping(value = "/login.do")
 	public String login() throws Exception {
 		return "test/login";
