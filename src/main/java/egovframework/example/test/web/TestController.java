@@ -8,9 +8,13 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,10 +41,25 @@ public class TestController {
 	private ReplyService replyservice;
 	
 	
-	@RequestMapping(value = "/test.do")
-	public String TilesTest() {
-		return "test/test";
+
+	@RequestMapping(value = "/admin.do")
+	public String admin(Model model) {
+		return "redirect:testList.do";
 	}
+	
+	@RequestMapping(value = "/user.do")
+	public String user(Model model) {
+		return "redirect:testList.do";
+	}
+	
+	 @RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+	 public String loout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 if (auth != null) {
+			 new SecurityContextLogoutHandler().logout(request, response, auth);
+		 }
+		 return "redirect:testList.do";
+	 }
 	
 	//로그인 페이지
 	@RequestMapping(value = "/login.do")
@@ -48,6 +67,12 @@ public class TestController {
 		return "test/login";
 		
 	}
+	
+	@RequestMapping(value = "/test.do")
+	public String TilesTest() {
+		return "test/test";
+	}
+	
 	
 	//인터셉터 테스트
 	@RequestMapping(value = "/callTestList.do", method = RequestMethod.GET)

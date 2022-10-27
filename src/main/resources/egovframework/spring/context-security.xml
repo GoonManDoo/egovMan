@@ -3,38 +3,41 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:s="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 
-	<http use-expressions="true">
-	    <intercept-url pattern="/login*" access="isAnonymous()" />
-	    <intercept-url pattern="/**" access="isAuthenticated()"/>
-	    <intercept-url pattern="/favicon.ico" access="ROLE_ANONYMOUS" />
-	    <intercept-url pattern="/css/test/**" access="permitAll" />
-	    
-	
-	    <form-login login-page='/login.do' 
-	      default-target-url="/testList.do" 
-	      authentication-failure-url="/login.do?error=true" />
-	      
-	    <logout logout-success-url="/login.do" />
-	<csrf disabled="true" />
-	</http>
-	
-	<authentication-manager>
-	    <authentication-provider>
-	        <user-service>
-	            <user name="user1" password="user1" authorities="ROLE_USER" />
-	        </user-service>
-	        <!-- <password-encoder ref="encoder" /> -->
-	    </authentication-provider>
-	</authentication-manager>
-	
-	<!-- <beans:bean id="encoder" 
-	  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-	</beans:bean> -->
+	<s:http auto-config="true" use-expressions="true">
+		<s:form-login
+			username-parameter="user_id"
+			password-parameter="user_pw"
+			login-processing-url="/login_check" 
+			login-page="/login.do" 
+			authentication-failure-url="/login.do?ng"
+		/>
+		<s:logout 
+			logout-url="/logout.do"
+			logout-success-url="/testList.do"
+			invalidate-session="true"
+			delete-cookies="true"
+		/>
+		<s:intercept-url pattern="/login.do*" access="isAnonymous()"/>
+		<intercept-url pattern="/**" access="isAuthenticated()"/>
+		<s:intercept-url pattern="/admin.do*" access="hasRole('ROLE_ADMIN')"/>
+		<s:intercept-url pattern="/user.do*" access="hasRole('ROLE_USER')"/>
+		<s:access-denied-handler error-page="/"/>
+	</s:http>
+		
+	<s:authentication-manager>
+		<s:authentication-provider>
+			<s:user-service>
+				<s:user name="user" password="1234" authorities="ROLE_USER"/>
+				<s:user name="admin" password="1234" authorities="ROLE_USER, ROLE_ADMIN"/>
+			</s:user-service>
+		</s:authentication-provider>
+	</s:authentication-manager>
 
 
 </beans:beans>
