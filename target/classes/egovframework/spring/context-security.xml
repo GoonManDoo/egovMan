@@ -31,12 +31,7 @@
 	</s:http>
 		
 	<s:authentication-manager>
-		<s:authentication-provider>
-			<s:user-service>
-				<s:user name="user" password="1234" authorities="ROLE_USER"/>
-				<s:user name="admin" password="1234" authorities="ROLE_USER, ROLE_ADMIN"/>
-			</s:user-service>
-		</s:authentication-provider>
+		<s:authentication-provider user-service-ref="loginService"/>
 	</s:authentication-manager>
 
 
