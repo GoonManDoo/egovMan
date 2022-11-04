@@ -14,6 +14,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ import egovframework.example.test.domain.ReplyVO;
 import egovframework.example.test.domain.Search;
 import egovframework.example.test.domain.TestVO;
 import egovframework.example.test.service.ReplyService;
+import egovframework.example.test.service.SignUpService;
 import egovframework.example.test.service.TestService;
 
 @Controller
@@ -37,18 +39,40 @@ public class TestController {
 	@Autowired
 	private TestService testServiceImpl;
 	
+	@Autowired
+	SignUpService signUpService;
+	
 	@Inject
 	private ReplyService replyservice;
 	
 	
+	
+	@RequestMapping("/signUpView.do")
+	public String signUpView(Model model) {
+		return "test/signUpView";
+	}
+		
+	@RequestMapping("/signUp.do")
+	public String signUp(HttpServletRequest request, Model model) {
+		//사용자가 입력한 정보를 파라미터로 넘김
+		boolean isInserted = signUpService.insertUserInfo(request.getParameter("id"), request.getParameter("password"));
+		if(isInserted) return "test/login";
+		else return "test/signUpView";
+	}
 
 	@RequestMapping(value = "/admin.do")
-	public String admin(Model model) {
+	public String admin(HttpServletRequest request, Model model, Authentication authentication) {
+		WebAuthenticationDetails wDetails = (WebAuthenticationDetails) authentication.getDetails();
+		String ipAddress = wDetails.getRemoteAddress();
+		request.setAttribute("ipAddress", ipAddress);
 		return "redirect:testList.do";
 	}
 	
 	@RequestMapping(value = "/user.do")
-	public String user(Model model) {
+	public String user(HttpServletRequest request, Model model, Authentication authentication) {
+		WebAuthenticationDetails wDetails = (WebAuthenticationDetails) authentication.getDetails();
+		String ipAddress = wDetails.getRemoteAddress();
+		request.setAttribute("ipAddress", ipAddress);
 		return "redirect:testList.do";
 	}
 	
@@ -91,11 +115,13 @@ public class TestController {
 	
 	// 글 목록 리스트, 페이징, 검색
 	@RequestMapping(value = "/testList.do")
-	public String testListDo(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+	public String testListDo(HttpServletRequest request, Model model, Authentication authentication, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@RequestParam(required = false, defaultValue = "testTitle") String searchType,
 			@RequestParam(required = false) String keyword, @ModelAttribute("search") Search search) throws Exception {
 
+		
+		
 		// 검색
 		model.addAttribute("search", search);
 		search.setSearchType(searchType);

@@ -10,6 +10,10 @@
    <c:if test="${param.ng!=null}">
 			<p> error : <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/> </p>
 		</c:if>
+		
+		<c:if test="${LoginFailMessage!=null}">
+			<p> Error : <c:out value="${LoginFailMessage}"/> </p>
+		</c:if>
       <table>
          <tr>
             <td>아이디 : </td>

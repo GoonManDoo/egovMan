@@ -24,6 +24,7 @@
 <p> 방가방가 <s:authentication property="name"/> </p>
 <s:authorize access="isAuthenticated()">
 		<p> Session On </p>
+		<p> IP : ${ipAddress} </p>
 	</s:authorize>
 	<s:authorize access="isAnonymous()">
 		<p> Session Off </p>

@@ -12,5 +12,13 @@
 	<select id="getAuthList" resultType="String">
 		SELECT AUTHORITY FROM USERAUTH WHERE ID=#{param1}
 	</select>
+	
+	<insert id="userSignUp">
+		INSERT INTO USERACC VALUES(#{param1},#{param2},#{param3})
+	</insert>
+	
+	<insert id="giveAuth">
+		INSERT INTO USERAUTH VALUES(#{param1},#{param2})
+	</insert>
 		
 </mapper>
