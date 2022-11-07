@@ -21,6 +21,8 @@
 </head>
 
 <body>
+<a href="${pageContext.request.contextPath}/admin.do">어드민</a><br>
+<a href="${pageContext.request.contextPath}/user.do">유저</a><br>
 <p> 방가방가 <s:authentication property="name"/> </p>
 <s:authorize access="isAuthenticated()">
 		<p> Session On </p>
@@ -30,8 +32,7 @@
 		<p> Session Off </p>
 	</s:authorize>
 	<a href="${pageContext.request.contextPath}/logout.do">Log Out</a>
-<%-- <a href="${pageContext.request.contextPath}/admin.do">어드민</a>
-<a href="${pageContext.request.contextPath}/user.do">유저</a> --%>
+
 	<h1>게시판List</h1>
 
 	<div class="testlist">

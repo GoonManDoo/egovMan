@@ -18,12 +18,14 @@
 			authentication-failure-handler-ref="loginFailHandler"
 			authentication-success-handler-ref="loginSuccessHandler"
 		/>
+		
 		<s:logout 
 			logout-url="/logout.do"
 			logout-success-url="/testList.do"
 			invalidate-session="true"
 			delete-cookies="true"
 		/>
+		<s:intercept-url pattern="/login.do*" access="isAnonymous()"/>
 		<s:intercept-url pattern="/admin.do*" access="hasRole('ROLE_ADMIN')"/>
 		<s:intercept-url pattern="/user.do*" access="hasRole('ROLE_USER')"/>
 		<s:access-denied-handler ref="accessFailHandler"/>

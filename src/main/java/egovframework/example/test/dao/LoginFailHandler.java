@@ -43,7 +43,7 @@ public class LoginFailHandler implements AuthenticationFailureHandler{
 			request.setAttribute("LoginFailMessage", "비밀번호가 만료된 계정입니다.");
 		}
 		else request.setAttribute("LoginFailMessage", "계정을 찾을 수 없습니다.");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/login.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/login.do");
 		dispatcher.forward(request, response);
 	}
 }

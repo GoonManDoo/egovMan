@@ -65,7 +65,7 @@ public class TestController {
 		WebAuthenticationDetails wDetails = (WebAuthenticationDetails) authentication.getDetails();
 		String ipAddress = wDetails.getRemoteAddress();
 		request.setAttribute("ipAddress", ipAddress);
-		return "redirect:testList.do";
+		return "test/testList";
 	}
 	
 	@RequestMapping(value = "/user.do")
@@ -73,7 +73,7 @@ public class TestController {
 		WebAuthenticationDetails wDetails = (WebAuthenticationDetails) authentication.getDetails();
 		String ipAddress = wDetails.getRemoteAddress();
 		request.setAttribute("ipAddress", ipAddress);
-		return "redirect:testList.do";
+		return "test/testList";
 	}
 	
 	 @RequestMapping(value = "/logout.do", method = RequestMethod.GET)
